@@ -1,0 +1,3 @@
+rootProject.name='SpinnerKetik'
+include ':app'
+include ':libspinnerketik'
