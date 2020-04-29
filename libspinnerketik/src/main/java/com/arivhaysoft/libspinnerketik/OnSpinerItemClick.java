@@ -6,5 +6,5 @@ package com.arivhaysoft.libspinnerketik;
 
 public interface OnSpinerItemClick
 {
-    public void onClick(String item, int position);
+    public void onClick(ModelData item, int position);
 }

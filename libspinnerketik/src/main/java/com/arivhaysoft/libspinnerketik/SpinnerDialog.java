@@ -18,7 +18,7 @@ import java.util.ArrayList;
  */
 
 public class SpinnerDialog {
-    ArrayList<String> items;
+    ArrayList<ModelData> items;
     Activity context;
     String dTitle,closeTitle="Close";
     OnSpinerItemClick onSpinerItemClick;
@@ -27,27 +27,27 @@ public class SpinnerDialog {
     int style;
 
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle) {
         this.items = items;
         this.context = activity;
         this.dTitle = dialogTitle;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, String closeTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle, String closeTitle) {
         this.items = items;
         this.context = activity;
         this.dTitle = dialogTitle;
         this.closeTitle=closeTitle;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, int style) {
+    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle, int style) {
         this.items = items;
         this.context = activity;
         this.dTitle = dialogTitle;
         this.style = style;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<String> items, String dialogTitle, int style, String closeTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle, int style, String closeTitle) {
         this.items = items;
         this.context = activity;
         this.dTitle = dialogTitle;
@@ -70,7 +70,7 @@ public class SpinnerDialog {
         title.setText(dTitle);
         final ListView listView = (ListView) v.findViewById(R.id.list);
         final EditText searchBox = (EditText) v.findViewById(R.id.searchBox);
-        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.items_view, items);
+        final MyAdapter adapter = new MyAdapter(context,R.layout.dialog_layout,items);
         listView.setAdapter(adapter);
         adb.setView(v);
         alertDialog = adb.create();
@@ -80,13 +80,7 @@ public class SpinnerDialog {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView t = (TextView) view.findViewById(R.id.text1);
-                for (int j = 0; j < items.size(); j++) {
-                    if (t.getText().toString().equalsIgnoreCase(items.get(j).toString())) {
-                        pos = j;
-                    }
-                }
-                onSpinerItemClick.onClick(t.getText().toString(), pos);
+                onSpinerItemClick.onClick(items.get(i), pos);
                 alertDialog.dismiss();
             }
         });
