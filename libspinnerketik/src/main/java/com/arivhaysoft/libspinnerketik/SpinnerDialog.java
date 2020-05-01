@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ public class SpinnerDialog {
     AlertDialog alertDialog;
     int pos;
     int style;
+    boolean isShowSearch;
 
 
     public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle) {
@@ -47,24 +49,25 @@ public class SpinnerDialog {
         this.style = style;
     }
 
-    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle, int style, String closeTitle) {
+    public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle, int style, String closeTitle, boolean isShowSearch) {
         this.items = items;
         this.context = activity;
         this.dTitle = dialogTitle;
         this.style = style;
         this.closeTitle=closeTitle;
+        this.isShowSearch=isShowSearch;
     }
 
     public void bindOnSpinerListener(OnSpinerItemClick onSpinerItemClick1) {
         this.onSpinerItemClick = onSpinerItemClick1;
     }
-
     public void showSpinerDialog() {
         AlertDialog.Builder adb = new AlertDialog.Builder(context);
         View v = context.getLayoutInflater().inflate(R.layout.dialog_layout, null);
         TextView rippleViewClose = (TextView) v.findViewById(R.id.close);
         TextView rippleViewClose2 = (TextView) v.findViewById(R.id.close2);
         TextView title = (TextView) v.findViewById(R.id.spinerTitle);
+        LinearLayout lySearch = (LinearLayout) v.findViewById(R.id.lySearch);
         rippleViewClose.setText(closeTitle);
         rippleViewClose2.setText(closeTitle);
         title.setText(dTitle);
@@ -77,6 +80,11 @@ public class SpinnerDialog {
         alertDialog.getWindow().getAttributes().windowAnimations = style;//R.style.DialogAnimations_SmileWindow;
         alertDialog.setCancelable(false);
 
+        if (isShowSearch){
+            lySearch.setVisibility(View.VISIBLE);
+        }else {
+            lySearch.setVisibility(View.GONE);
+        }
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
