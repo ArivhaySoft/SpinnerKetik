@@ -26,7 +26,7 @@ public class SpinnerDialog {
     AlertDialog alertDialog;
     int pos;
     int style;
-    boolean isShowSearch;
+    boolean isShowSearch = true;
 
 
     public SpinnerDialog(Activity activity, ArrayList<ModelData> items, String dialogTitle) {
