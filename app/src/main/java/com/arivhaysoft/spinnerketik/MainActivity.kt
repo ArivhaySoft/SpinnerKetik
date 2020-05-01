@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
             listSpinner.add(ModelData("KNG","KUNING"))
             listSpinner.add(ModelData("HJU","HUJAU"))
 
-            spinnerDialog = SpinnerDialog(this, listSpinner, "Pilih Warna", R.style.DialogAnimations_SmileWindow, "Tutup")
+            spinnerDialog = SpinnerDialog(this, listSpinner, "Pilih Warna", R.style.DialogAnimations_SmileWindow, "Tutup",true)
             spinnerDialog.bindOnSpinerListener { item, position ->
                 Toast.makeText(this,item.kode,Toast.LENGTH_SHORT).show()
             }
